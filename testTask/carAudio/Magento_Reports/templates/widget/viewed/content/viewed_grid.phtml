@@ -13,7 +13,7 @@
  */
 ?>
 <?php
-if ($exist = ($block->getRecentlyViewedProducts() && $block->getRecentlyViewedProducts()->getSize())) {
+if ($exist = ($block->getRecentlyViewedProducts() && $block->getRecentlyViewedProducts()->getSize(10))) {
     $type = 'widget-viewed';
     $mode = 'grid';
 
@@ -36,7 +36,7 @@ if ($exist = ($block->getRecentlyViewedProducts() && $block->getRecentlyViewedPr
             <strong role="heading" aria-level="2"><?= $block->escapeHtml($title) ?></strong>
         </div>
 
-        <a href="#" class="all-viewed"><?= __('All viewed products')?></a>
+        <a class="all-viewed"><?= __('All viewed products')?></a>
 
         <div class="block-content">
             <?= '<!-- ' . $block->escapeHtml($image) . '-->' ?>

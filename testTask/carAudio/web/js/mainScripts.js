@@ -47,4 +47,23 @@ define([
         scrollAfterSelect: false,
         minimumResultsForSearch: Infinity
     });
+
+    //remove slick class from viewed product
+    var showAllViewed = $('.all-viewed');
+    showAllViewed.click(function() {
+
+        var elementNotSlider = $(".recently-viewed-products-list");
+        
+        if (elementNotSlider.hasClass('slick-initialized')) {
+
+            elementNotSlider.slick('destroy');
+        } else 
+            elementNotSlider.slick({
+                infinite: true,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                variableWidth: true
+            });
+    });
 });
