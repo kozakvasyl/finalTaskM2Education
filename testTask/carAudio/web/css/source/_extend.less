@@ -1,0 +1,103 @@
+
+& when (@media-common = true) {
+
+    //Breadcrumbs -----------------------------
+    .breadcrumbs {
+        ul li {
+            line-height: 18px;
+        }
+    }
+
+    //Dynamic buttons -----------------------------
+    .show-btn, .hide-btn, .morelink {
+        color: #333333;
+        cursor: pointer;
+        font-size: 13px;
+        margin-top: 15px;
+        padding-left: 18px;
+        position: relative;
+        text-decoration: underline;
+        &::before {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 13px;
+            color: #ff0000;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    .show-btn, .morelink {
+        &::before {
+            content: '\f078';
+        }
+    }
+    .hide-btn, .less {
+        &::before {
+            content: '\f077';
+        }
+    }
+    .morelink {
+        display: block;
+    }
+    //Products slider style --------------------------
+    .product-sku-available {
+        float: left;
+        font-size: 12px;
+        color: #7a7a7b;
+        width: 100%;
+        line-height: 30px;
+        margin-bottom: 10px;
+        .stock {
+            float: right;
+            font-size: 14px;
+        }
+        .available {
+            color: #368c63;
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 13px;
+                content: '\f00c';
+                color: currentColor;
+                margin-right: 5px;
+            }
+        }
+        .unavailable {
+            color: #fb2539;
+        }
+    }
+    //SLICK style--------------------------------
+    .slick-initialized.slick-slider {
+        .slick-arrow {
+            background: #474a4e;
+            border: none;
+            &::before {
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                color: #fff;
+                font-size: 20px;
+            }
+            &:hover {
+                background: #252727;
+            }
+        }
+        .slick-next {
+            background: #3a3c3f;
+            &::before {
+                content: "\f054";
+            }
+        }
+        .slick-prev {
+            &::before {
+                content: "\f053";
+            }
+        }
+    }
+
+}
+
+

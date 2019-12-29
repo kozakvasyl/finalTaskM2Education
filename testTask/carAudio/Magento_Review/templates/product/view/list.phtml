@@ -1,0 +1,83 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var Magento\Review\Block\Product\View\ListView $block */
+
+$_items = $block->getReviewsCollection()->getItems();
+$format = $block->getDateFormat() ?: \IntlDateFormatter::SHORT;
+?>
+<?php if (count($_items)) : ?>
+<div class="block review-list" id="customer-reviews">
+    
+    <div class="block-content">
+        <div class="toolbar review-toolbar">
+            <?= $block->getChildHtml('toolbar') ?>
+        </div>
+        <ol class="items review-items">
+        <?php foreach ($_items as $_review) : ?>
+            <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+                <div class="custom-reviews-wrapper">
+                    <div class="review-details">
+                        <p class="review-author">
+                            <strong class="review-details-value" itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                        </p>
+                        <p class="review-date">
+                            <time class="review-details-value" itemprop="datePublished" datetime="<?= $block->escapeHtmlAttr($block->formatDate($_review->getCreatedAt(), $format)) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?></time>
+                        </p>
+                    </div>
+                    <div class="review-content" itemprop="description">
+                        <?= /* @noEscape */ nl2br($block->escapeHtml($_review->getDetail())) ?>
+                    </div>
+                    <div class="review-after">
+                        <p><span class="advantages"><?= __('Advantages:')?></span> <?= __('good battery, and generally a good smartphone')?></p>
+                        <p><span class="disadvantages"><?= __('Disadvantages:')?></span> <?= __('not found')?></p>
+                        <div class="resolts-container">
+                            <div class="answers">
+                                <a href="#">1 <?= __('resolt')?></a>
+                                <a href="#"><?= __('To answer')?></a>
+                            </div>
+                            <div class="answer-rating">
+                                <p><?= __('Did you find this review helpful:')?> <a class="answer-god">14</a> <a class="answer-bad">3</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php if (count($_review->getRatingVotes())) : ?>
+                    <div class="review-ratings">
+                    <?php foreach ($_review->getRatingVotes() as $_vote) : ?>
+                    <div class="rating-summary item" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                        <span class="label rating-label"><span><?= __('Rating_') ?></span></span>
+                        <div class="rating-result" title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                            <meta itemprop="worstRating" content = "1"/>
+                            <meta itemprop="bestRating" content = "100"/>
+                            <span style="width:<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                                <span class="rating-value" itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()/10) ?>,0</span>
+                            </span>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+        </ol>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".items.review-items": { 
+            "js/lib/hideShowElements": {
+                "elementToHide": ".item.review-item",
+                "linesQty": "3",
+                "textShowBtn": "<?= __('Show all reviews')?>",
+                "textHideBtn": "<?= __('Show less reviews')?>",
+                "textHideElemClass": "hiden-reviews"
+            }
+        }
+    }
+</script>
+<?php endif;?>

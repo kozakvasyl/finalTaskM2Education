@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <container name="product.info.wrapper" htmlTag="div" htmlClass="product-info-wrapper" before="-"></container>
+        </referenceContainer>
+
+        <move element="product.info" destination="product.info.wrapper" after="product.info.price"/>
+        <move element="productalert.stock" destination="product.info.wrapper" after="product.info.price"/>
+        <move element="product.info.price" destination="product.info.wrapper" before="-"/>
+        <move element="product.info.overview" destination="product.info.wrapper" after="product.info"/>
+        <move element="product.info.social" destination="product.info.wrapper" after="-"/>
+
+        <move element="product.info.mailto" destination="product.info.social" before="-"/>
+        <move element="view.addto.compare" destination="product.info.social" before="-"/>
+        
+        <move element="product.info.stock.sku" destination="product.info.main" before="-"/>
+        <move element="product.info.review" destination="product.info.main" after="product.info.stock.sku"/>
+        <move element="product.info.sku" destination="page.main.title"/>
+
+        <referenceContainer name="product.info.addto" remove="true"></referenceContainer>
+
+        <!-- Move reviews tab -->
+        <move element="reviews.tab" destination="content" after="product.info.details"/>
+        <!-- Show customer reviews -->
+        <block class="Magento\Review\Block\Product\Review" name="reviews.tab" as="reviews" template="Magento_Review::review.phtml" group="detailed_info">
+            <block class="Magento\Review\Block\Product\View\ListView" name="product.info.product_additional_data" as="product_additional_data" template="product/view/list.phtml"/>
+            <block class="Magento\Review\Block\Form" name="product.review.form" as="review_form" ifconfig="catalog/review/active"/>
+        </block>
+
+        <referenceContainer name="content">
+            <!-- change order of description tabs -->
+            <block class="Magento\Catalog\Block\Product\View\Details" name="product.info.details" template="Magento_Catalog::product/view/details.phtml" after="product.info.media">
+                <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributes" as="additional" template="Magento_Catalog::product/view/attributes.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">More Information</argument>
+                        <argument name="sort_order" xsi:type="string">10</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description" as="description" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info">
+                    <arguments>
+                        <argument name="at_call" xsi:type="string">getDescription</argument>
+                        <argument name="at_code" xsi:type="string">description</argument>
+                        <argument name="css_class" xsi:type="string">description</argument>
+                        <argument name="at_label" xsi:type="string">none</argument>
+                        <argument name="title" translate="true" xsi:type="string">Details</argument>
+                        <argument name="sort_order" xsi:type="string">20</argument>
+                    </arguments>
+                </block>
+            </block>
+
+            <block class="Magento\Review\Block\Product\Review" name="review.button" template="Magento_Catalog::review_button.phtml"/>
+            
+            <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description.custom" as="description" template="Magento_Catalog::product/view/attribute.phtml" group="detailed_info">
+                <arguments>
+                    <argument name="at_call" xsi:type="string">getDescription</argument>
+                    <argument name="at_code" xsi:type="string">description</argument>
+                    <argument name="css_class" xsi:type="string">description</argument>
+                    <argument name="at_label" translate="true" xsi:type="string">Product description</argument>
+                </arguments>
+            </block>
+
+            <!-- <block class="Magento\Cms\Block\Block" name="show-description-button">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">show-description-button</argument>
+                </arguments>
+            </block> -->
+
+            <block class="Magento\Reports\Block\Product\Widget\Viewed" after="-" name="recently_viewed" cacheable="false" template="Magento_Reports::widget/viewed/content/viewed_grid.phtml">
+                <action method="setPageSize">
+                    <argument name="page_size" xsi:type="number">5</argument>
+                </action>
+            </block>
+
+        </referenceContainer>
+
+        <move element="product.info.media" destination="content" before="-"/>
+        <move element="product.info.main" destination="content" after="product.info.media"/>
+
+        <move element="catalog.product.related" destination="content" after="product.info.main"/>
+
+        <move element="review.button" destination="content" after="product.info.details"/>
+        <move element="custom-description" destination="content" before="review.button"/>
+        <move element="product.info.description.custom" destination="content" after="product.info.details"/>
+        <move element="show-description-button" destination="content" after="product.info.description.custom"/>
+    </body>
+</page>

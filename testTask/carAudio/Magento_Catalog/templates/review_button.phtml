@@ -1,0 +1,9 @@
+<?php
+/** @var \Magento\Review\Block\Product\Review $block */
+?>
+<div class="review-qty-wrapper">
+    <div class="review_counter-section">
+        <span><?= __('Reviews')?> (<?= $block->escapeHtml($block->getCollectionSize()) ?>) </span>
+    </div>
+    <button class="review_hiden"><?= __('Add review')?></button>
+</div>
