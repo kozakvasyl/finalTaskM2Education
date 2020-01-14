@@ -3,6 +3,7 @@ define([
     'select2',
     'slick',
     'shorttext',
+    'ellipsis',
     'domReady!'
     ], function ($) {
 
@@ -40,7 +41,35 @@ define([
         "moreText": $.mage.__('Show more'),
         "lessText": $.mage.__('Show less'),
     });
-    
+    /* var ellipsisElemenrt = $('.product.attribute.description .value p'),
+        hidenText = ellipsisElemenrt.find('.ellip-line'),
+        isShown = false;
+
+    ellipsisElemenrt.ellipsis({
+        lines: 3,
+        ellipClass: 'ellip',
+        responsive: true
+    });
+
+    if (hidenText) {
+        ellipsisElemenrt.parent().append('<a class="show-btn">' + $.mage.__('Show more') + '</a>');
+
+        $('.show-btn').off('click').on('click', function() {
+            if (isShown) {
+                $(this).text($.mage.__('Show less')).addClass('hide-btn');
+                ellipsisElemenrt.find('.ellip-line').removeClass('ellip-line');
+                isShown = false;
+            } else {
+                ellipsisElemenrt.ellipsis({
+                    lines: 3,
+                    ellipClass: 'ellip',
+                    responsive: true
+                  });
+                $(this).text($.mage.__('Show more')).removeClass('hide-btn');
+                isShown = true;
+            };
+        });
+    }; */
 
     //select plugin
     $('.select-city, .select-phone').select2({

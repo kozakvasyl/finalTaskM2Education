@@ -4,6 +4,7 @@ var config = {
             select2: 'js/lib/select2.full',
             slick: 'js/lib/slick',
             shorttext: 'js/lib/shorttext',
+            ellipsis: 'js/lib/jquery.ellipsis.min'
         }
     },
     deps: [
@@ -17,6 +18,9 @@ var config = {
             deps: ['jquery']
         },
         'shorttext': {
+            deps: ['jquery']
+        },
+        'ellipsis': {
             deps: ['jquery']
         }
     },
