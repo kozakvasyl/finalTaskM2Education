@@ -21,6 +21,17 @@
 @layout__width-xs-indent: 0;
 @layout-indent__width: 0;
 
+//custom queries
+//-------------------------------------------
+@screen__lm: 1290px;
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+
+    @media all and (min-width: @screen__lm),
+    print {
+        .media-width('min', @screen__lm);
+    }
+}
+
 //  Links
 //  ---------------------------------------------
 @link__color: #777777;
