@@ -3,7 +3,7 @@
 
     .page-header {
         .panel.wrapper {
-            /* background-color: #eff0f3; */
+            background-color: #eff0f3;
             .panel.header {
                 color: #777;
                 padding: 0;
@@ -528,33 +528,19 @@
     }
     //--------------------------
 }
+//mobile
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-    .panel.wrapper {
-        background-color: #a79f32;
-    }
-    .logo {
-        width: 100%;
-      }
 
 }
-
+//tablet
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .panel.wrapper {
-        background-color: #74a732;
-    }
 
 }
-
+//desctop
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .panel.wrapper {
-        background-color: #3261a7;
-    }
 
 }
-
+//custom
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__lm) {
-    .panel.wrapper {
-        background-color: #9032a7;
-    }
 
 }
